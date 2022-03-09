@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TOPOLOGICALLY-INFORMED ATLAS LEARNING %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Thomas Cohn, Nikhil Devraj, Odest Chadwicke Jenkins
+
+Summary.txt
+
+The datasets folder contains code for generating/interfacing with the data used in this project.
+The src folder contains the source code, including our implementation of atlas learning.
+The scripts folder contains all of the runnables. Files in the scripts folder can be run from the root directory of this folder or from within the scripts folder. Run the python files with at least python 3.6.
+
+List of files and their uses:
+
+DATASETS: code for generating/interfacing with the data used in this project.
+
+datasets/synthetic_manifolds.py
+	This contains code to generate data sampled from various synthetic manifolds.
+
+datasets/tial_articulated_object_dataset.py
+	This contains code to read and process the articulated object manipulation videos, and to store to/read from csv files containing object pose information.
+
+datasets/articulated_objects/tial_articulated_object_dataset/calib_tommy_phone.csv
+	This is the camera calibration data from the camera used to obtain the video sequences.
+
+datasets/articulated_objects/tial_articulated_object_dataset/can_opener_2.csv
+	This is the apriltag pose data for the can opener manipulation sequence.
+
+datasets/articulated_objects/tial_articulated_object_dataset/corkscrew.csv
+	This is the apriltag pose data for the corkscrew bottle opener manipulation sequence.
+
+SRC: source code, including our implementation of atlas learning.
+
+src/atlas.py
+	This contains the main class used for atlas learning, and constructing an inverse mapping from an embedding back to a manifold.
+
+src/cyclecut.py
+	This contains an implementation of the find_large_atomic_cycle routine, from the paper "Robust manifold learning with CycleCut".
+
+src/geometry.py
+	This contains various functions for interacting with points and poses as vectors.
+
+src/util.py
+	This contains various utility functions that are used throughout the project.
+
+src/visualization.py
+	This contains various functions used throughout the project for visualizing data and results.
+
+src/comparisons/autoencoder_atlas.py
+	This contains an implementation of the atlas autoencoder, presented in the paper "Autoencoding Topology". This code was written by Eric Korman (https://web.ma.utexas.edu/users/ekorman/).
+
+SCRIPTS: runnables -- run from the root directory of this folder (i.e. with the command `python3 scripts/[script_file_name]), using python 3.6 or later.
+
+scripts/autoencoding_topology_test.py
+	This script performs atlas learning with an autoencoder, according to the methodology from the paper "Autoencoding Topology". This script uses the torus synthetic manifold as its dataset, although that can be modified by changing line 26 to any of the other synthetic manifolds. The first figure shows the domain assignments for each chart. Press "q" or close the window to see the next figure. The next few figures are a series of 3D plots showing the domains of each individual chart, followed by a series of 2D plots showing their respective embeddings. The final figure shows a reconstruction of the manifold, obtained by mapping each point in the embedding space through the decoder.
+
+scripts/can_opener_kinematic_model.py
+	This script constructs the kinematic model of the can opener. The first figure shows the embeddings of the two charts, colored by both the loopy and non-loopy components of the data. Press "q" or close the window to see the next figure. The second figure is the interactive visualization of the kinematic model. Move your mouse anywhere within the convex hull of either embedding, and the resulting object pose will be shown. If you have downloaded the video sequence, pressing c will save the current state, and show the nearest corresponding input image. Pressing "space" will toggle the two different colorings, representing the two latent parameters.
+
+scripts/corkscrew_kinematic_model.py
+	This script constructs the kinematic model of the corkscrew bottle opener. The first figure shows the embeddings of the two charts, colored by both the loopy and non-loopy components of the data. Press "q" or close the window to see the next figure. The second figure is the interactive visualization of the kinematic model. Move your mouse anywhere within the convex hull of either embedding, and the resulting object pose will be shown. If you have downloaded the video sequence, pressing c will save the current state, and show the nearest corresponding input image. Pressing "space" will toggle the two different colorings, representing the two latent parameters.
+
+scripts/large_atomic_cycle_viz.py
+	This script visualizes the find_large_atomic_cycle routine. When you're done viewing each figure, press "space" to load the next one.
+
+scripts/mocap_walking_manifold.py
+	This script visualizes an atlas embedding of a walking example from the CMU Mocap dataset. Drag your mouse through either of the top two charts in the interactive figure; you will notice the crosshairs moving through both bottom charts when the embedded point lies in the overlap. The walking figure at the bottom will change as you move along the embedding space. (Note that error messages may display as you move through the embedding. You may ignore them; they do not contribute to the functionality or visualization.)
+
+scripts/synthetic_cylinder_experiment.py
+	This script performs atlas learning on the cylinder manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embeddings. The top-left image is the manifold itself, and the bottom left image is the embedding constructed by ISOMAP. Each successive image in the top row is the domain of a chart, and the image below it is that chart's embedding.
+
+scripts/synthetic_klein_bottle_experiment.py
+	This script performs atlas learning on the klein bottle manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embeddings. The top-left image is the manifold itself, and the bottom left image is the embedding constructed by ISOMAP. Each successive image in the top row is the domain of a chart, and the image below it is that chart's embedding.
+
+scripts/synthetic_mobius_strip_experiment.py
+	This script performs atlas learning on the mobius strip manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embeddings. The top-left image is the manifold itself, and the bottom left image is the embedding constructed by ISOMAP. Each successive image in the top row is the domain of a chart, and the image below it is that chart's embedding.
+
+scripts/synthetic_RP2_experiment.py
+	This script performs atlas learning on the real projective plane (RP2) manifold. It will first visualize a projection of the dataset into 3D space as a self-intersecting Roman Surface. Pressing "space" will toggle the two different colorings, representing the two latent parameters on the manifold. Press "q" or close the window to continue. The next figure will display a single embedding of a single chart. Pressing "i" will display the ISOMAP embedding, pressing "c" will display the current chart embedding, and pressing "n" will display the embedding of the next chart. Pressing "space" will toggle the two different colorings.
+
+scripts/synthetic_s_sheet_experiment.py
+	This script performs atlas learning on the s sheet manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embedding: this manifold only requires one chart.
+
+scripts/synthetic_SO3_experiment.py
+	This script performs atlas learning on the special orthogonal group (SO3) manifold. SO3 is a 3-manifold, so the embeddings are 3-dimensional. All plots can be rotated by clicking and dragging. The figure will display a single embedding of a single chart. Pressing "i" will display the ISOMAP embedding, pressing "c" will display the current chart embedding, and pressing "n" will display the embedding of the next chart. Pressing "space" will toggle between the three different colorings, representing the three latent parameters on the manifold.
+
+scripts/synthetic_sphere_experiment.py
+	This script performs atlas learning on the sphere manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embeddings. The top-left image is the manifold itself, and the bottom left image is the embedding constructed by ISOMAP. Each successive image in the top row is the domain of a chart, and the image below it is that chart's embedding.
+
+scripts/synthetic_swiss_roll_experiment.py
+	This script performs atlas learning on the swiss roll manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embedding: this manifold only requires one chart.
+
+scripts/synthetic_torus_experiment.py
+	This script performs atlas learning on the torus manifold. It will first visualize the chart combining process. When charts are no longer combining, close the window or press "q". It will then show the embeddings. The top-left image is the manifold itself, and the bottom left image is the embedding constructed by ISOMAP. Each successive image in the top row is the domain of a chart, and the image below it is that chart's embedding.
