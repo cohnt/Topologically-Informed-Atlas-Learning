@@ -4,7 +4,7 @@
 
 ---
 
-This repository contains the source code associated with the paper *Topologically-Informed Atlas Learning*, to appear in the 2022 IEEE International Conference on Robotics and Automation (ICRA). A preprint is available at [arXiv:2110.00429](https://arxiv.org/abs/2110.00429). Check out the [project website](http://tommycohn.com/projects/tial.html) for more details.
+This repository contains the source code associated with the paper *Topologically-Informed Atlas Learning*, which was published in the 2022 IEEE International Conference on Robotics and Automation (ICRA). The paper is available [here](https://ieeexplore.ieee.org/abstract/document/9812311). Check out the [project website](http://tommycohn.com/projects/tial.html) for more details.
 
 ![gif not rendered](teaser.gif)
 
